@@ -27,7 +27,9 @@ if ($migrate == "true") {
     $PMU_CLASSIC_API_USER = getenv('PMU_CLASSIC_API_USER');
     $PMU_CLASSIC_API_PASSWORD = getenv('PMU_CLASSIC_API_PASSWORD');
     $AUTH = shell_exec("echo -ne \"$PMU_CLASSIC_API_USER:$PMU_CLASSIC_API_PASSWORD\" | base64 --wrap 0");
-    $MIGRATABLE_SITE_DATA = shell_exec("curl --header \"Content-Type: application/json\" --header \"Authorization: Basic $AUTH\" \https://mu.ps-pantheon.com/api/uw/v2/site/$uuid");
+    $MIGRATABLE_SITE_DATA = shell_exec("curl --header \"Content-Type: application/json\" --header \"Authorization: Basic $AUTH\" https://mu.ps-pantheon.com/api/uw/v2/site/$uuid");
+    print_r($MIGRATABLE_SITE_DATA);
+    print_r(PHP_EOL);
     echo "Migratable site data: " . PHP_EOL;
     print_r(json_decode($MIGRATABLE_SITE_DATA, TRUE), TRUE) . PHP_EOL;
 }
