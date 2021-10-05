@@ -2,7 +2,7 @@
 Imports and updates PMU sites into the ClientDB
 
 The following site attributes are inserted and updated by this Action:
-- `migrate` - If "true", will call the PMU Classic API to pull over the site data from the Wordpress API into the new DB.
+- `migrate` - If "true", will call the PMU Classic API to pull over the site data from the Wordpress API into the new DB. If this is used, only have to provide `uuid` to query against PMU Classic API.
 - `name` - The site label on Pantheon
 - `uuid` - the site UUID
 - `framework` - The site framework - "drupal", "wordpress", "wordpress_network"
