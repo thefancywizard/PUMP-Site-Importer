@@ -1,0 +1,79 @@
+name: Stage Updates
+on:
+  workflow_dispatch:
+    inputs:
+      migrate:
+        description: 'The Pantheon site UUID'
+        required: true
+        default: ''
+      name:
+        description: 'Human friendly label of site, ideally would match the Pantheon site label'
+        default: ''
+      uuid:
+        description: 'Pantheon site UUID'
+        default: ''
+      framework:
+        description: 'Which CMS - "drupal" or "wordpress"'
+        default: ''
+      vrt:
+        description: 'JSON array of VRT url paths to check'
+        default: ''
+      contacts:
+        description: 'JSON array of staff and client contact emails'
+        default: ''
+      owner:
+        description: 'Email of the Pantheon staff owner of this particular site.'
+        default: ''
+jobs:
+  import-site:
+    runs-on: ubuntu-latest
+    steps:  
+      - uses: actions/checkout@v2
+      - name: Setup PHP and remove shared extension
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          extensions: grpc
+      - name: Install terminus
+        run: |
+          mkdir -p .github/fixtures/terminus
+          cd .github/fixtures/terminus
+          composer require pantheon-systems/terminus:2.6.1
+          echo "$GITHUB_WORKSPACE/.github/fixtures/terminus/vendor/bin/" >> $GITHUB_PATH
+          vendor/bin/terminus auth:login --machine-token=${{ secrets.PMU_MACHINE_TOKEN }}
+      - uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.PMU_SSH_KEY }}
+          config: ${{ secrets.PANTHEON_SSH_CONFIG }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+      - name: Stage updates
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          migrate: ${{ github.event.inputs.migrate }}
+          name: ${{ github.event.inputs.name }}
+          uuid: ${{ github.event.inputs.uuid }}
+          framework: ${{ github.event.inputs.framework }}
+          vrt: ${{ github.event.inputs.vrt }}
+          contacts: ${{ github.event.inputs.contacts }}
+          owner: ${{ github.event.inputs.owner }}
+          PMU_CLASSIC_API_PASSWORD: ${{ secrets.PMU_CLASSIC_API_PASSWORD }}
+          PMU_CLASSIC_API_USER: ${{ secrets.PMU_CLASSIC_API_USER }}
+        run: |
+          composer install --no-interaction --no-progress
+          php import-site.php
+          update_data=$(cat /tmp/update_data.json)
+          echo "::set-output name=UPDATE_DATA::$update_data"
+        id: detect-updates-setup
+      # - name: Upload artifact of JSON data
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: update_data
+      #     path: /tmp/update_data.json
+      #     retention-days: 2
+      # - name: Store update data in realtime database
+      #   uses: w9jds/firebase-trigger@master
+      #   with:
+      #     credentials: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+      #     databaseUrl: https://pantheon-managed-updates-default-rtdb.firebaseio.com
+      #     path: ${{ github.event.inputs.site_uuid }}/site_info
+      #     value: ${{ steps.detect-updates-setup.outputs.UPDATE_DATA }}

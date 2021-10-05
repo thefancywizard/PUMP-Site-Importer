@@ -1,0 +1,12 @@
+{
+    "name": "pantheon-managed-updates/site-importer",
+    "description": "Imports a site information into the Pantheon Managed updates Database",
+    "type": "project",
+    "authors": [
+        {
+            "name": "PMU-ops",
+            "email": "62953125+PMU-ops@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
