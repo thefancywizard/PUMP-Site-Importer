@@ -61,8 +61,8 @@ jobs:
         run: |
           composer install --no-interaction --no-progress
           php import-site.php
-          update_data=$(cat /tmp/update_data.json)
-          echo "::set-output name=UPDATE_DATA::$update_data"
+          # update_data=$(cat /tmp/update_data.json)
+          # echo "::set-output name=UPDATE_DATA::$update_data"
         id: detect-updates-setup
       # - name: Upload artifact of JSON data
       #   uses: actions/upload-artifact@v2
