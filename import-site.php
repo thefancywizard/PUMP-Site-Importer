@@ -29,7 +29,7 @@ if ($migrate == "true") {
     $AUTH = shell_exec("echo -ne \"$PMU_CLASSIC_API_USER:$PMU_CLASSIC_API_PASSWORD\" | base64 --wrap 0");
     $MIGRATABLE_SITE_DATA = shell_exec("curl --header \"Content-Type: application/json\" --header \"Authorization: Basic $AUTH\" \https://mu.ps-pantheon.com/api/uw/v2/site/$uuid");
     echo "Migratable site data: " . PHP_EOL;
-    echo json_decode($MIGRATABLE_SITE_DATA, true) . PHP_EOL;
+    print_r(json_decode($MIGRATABLE_SITE_DATA, TRUE), TRUE) . PHP_EOL;
 }
 else {
     echo "TODO: Non migrated import" . PHP_EOL;
