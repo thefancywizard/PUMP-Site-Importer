@@ -26,8 +26,15 @@ if ($migrate == "true") {
     // Migrate the site from PMU API.
     print_r("Going to import queried data:" . PHP_EOL);
     $SITE_CLASSIC_PMU_DATA = getenv('SITE_CLASSIC_PMU_DATA');
-    print_r($SITE_CLASSIC_PMU_DATA);
+    print_r(json_decode($SITE_CLASSIC_PMU_DATA, TRUE));
+    $name = $SITE_CLASSIC_PMU_DATA['name'];
+
+
 }
 else {
     echo "TODO: Non migrated import" . PHP_EOL;
 }
+
+// Write out data to pass to next steps.
+$PATH_TO_module_UPDATE_DATA_JSON = "/tmp/update_data.json";
+file_put_contents($PATH_TO_module_UPDATE_DATA_JSON, $module_update_data);
