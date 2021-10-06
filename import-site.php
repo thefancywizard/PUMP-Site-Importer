@@ -16,7 +16,7 @@ function env($varname, $default) {
 
 $migrate = env('migrate', NULL);
 $name = env('name', NULL);
-$uuid = env('uuid', NULL);
+$site_uuid = env('site_uuid', NULL);
 $framework = env('framework', NULL);
 $vrt = env('vrt', NULL);
 $contacts = env('contacts', NULL);

@@ -9,7 +9,7 @@ on:
       name:
         description: 'Human friendly label of site, ideally would match the Pantheon site label'
         default: ''
-      uuid:
+      site_uuid:
         description: 'Pantheon site UUID'
         default: ''
       framework:
@@ -53,12 +53,12 @@ jobs:
           echo $SITE_CLASSIC_PMU_DATA
           echo "::set-output name=SITE_CLASSIC_PMU_DATA::$SITE_CLASSIC_PMU_DATA"
         id: get_site_data_from_classic_api
-      - name: Import site ${{ github.event.inputs.uuid }}
+      - name: Import site ${{ github.event.inputs.site_uuid }}
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           migrate: ${{ github.event.inputs.migrate }}
           name: ${{ github.event.inputs.name }}
-          uuid: ${{ github.event.inputs.uuid }}
+          site_uuid: ${{ github.event.inputs.site_uuid }}
           framework: ${{ github.event.inputs.framework }}
           vrt: ${{ github.event.inputs.vrt }}
           contacts: ${{ github.event.inputs.contacts }}
