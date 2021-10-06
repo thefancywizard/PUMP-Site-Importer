@@ -35,7 +35,7 @@ if ($migrate == "true") {
     $site_info['name'] = $name;
     $site_info['framework'] = $framework;
     $site_info['owner'] = $owner;
-    $vrt['vrt'] = $vrt;
+    $site_info['vrt'] = $vrt;
 
 }
 else {
