@@ -27,9 +27,9 @@ if ($migrate == "true") {
     // Migrate the site from PMU API.
     print_r("Going to import queried data:" . PHP_EOL);
     $SITE_CLASSIC_PMU_DATA = getenv('SITE_CLASSIC_PMU_DATA');
-    print_r(json_decode($SITE_CLASSIC_PMU_DATA, TRUE));
+    $SITE_CLASSIC_PMU_DATA = json_decode($SITE_CLASSIC_PMU_DATA, TRUE);
     $name = $SITE_CLASSIC_PMU_DATA['name'];
-    
+
     $site_info['name'] = $name;
 
 }
