@@ -22,13 +22,15 @@ $vrt = env('vrt', NULL);
 $contacts = env('contacts', NULL);
 $owner = env('owner', NULL);
 
+$site_info = [];
 if ($migrate == "true") {
     // Migrate the site from PMU API.
     print_r("Going to import queried data:" . PHP_EOL);
     $SITE_CLASSIC_PMU_DATA = getenv('SITE_CLASSIC_PMU_DATA');
     print_r(json_decode($SITE_CLASSIC_PMU_DATA, TRUE));
     $name = $SITE_CLASSIC_PMU_DATA['name'];
-
+    
+    $site_info['name'] = $name;
 
 }
 else {
@@ -37,4 +39,4 @@ else {
 
 // Write out data to pass to next steps.
 $PATH_TO_module_UPDATE_DATA_JSON = "/tmp/update_data.json";
-file_put_contents($PATH_TO_module_UPDATE_DATA_JSON, $module_update_data);
+file_put_contents($PATH_TO_module_UPDATE_DATA_JSON, json_encode($site_info));
