@@ -31,9 +31,11 @@ if ($migrate == "true") {
     $name = $SITE_CLASSIC_PMU_DATA['name'];
     $framework = $SITE_CLASSIC_PMU_DATA['framework'];
     $owner = $SITE_CLASSIC_PMU_DATA['author']['email'];
+    $vrt = urlencode(json_encode($SITE_CLASSIC_PMU_DATA['vrt']));
     $site_info['name'] = $name;
     $site_info['framework'] = $framework;
     $site_info['owner'] = $owner;
+    $vrt['vrt'] = $vrt;
 
 }
 else {
