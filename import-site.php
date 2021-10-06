@@ -29,8 +29,11 @@ if ($migrate == "true") {
     $SITE_CLASSIC_PMU_DATA = getenv('SITE_CLASSIC_PMU_DATA');
     $SITE_CLASSIC_PMU_DATA = json_decode($SITE_CLASSIC_PMU_DATA, TRUE);
     $name = $SITE_CLASSIC_PMU_DATA['name'];
-
+    $framework = $SITE_CLASSIC_PMU_DATA['framework'];
+    $owner = $SITE_CLASSIC_PMU_DATA['author']['email'];
     $site_info['name'] = $name;
+    $site_info['framework'] = $framework;
+    $site_info['owner'] = $owner;
 
 }
 else {
