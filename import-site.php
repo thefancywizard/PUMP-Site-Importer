@@ -39,7 +39,10 @@ if ($migrate == "true") {
 
 }
 else {
-    echo "TODO: Non migrated import" . PHP_EOL;
+    $site_info['name'] = $name;
+    $site_info['framework'] = $framework;
+    $site_info['owner'] = $owner;
+    $site_info['vrt'] = $vrt;
 }
 
 // Write out data to pass to next steps.
