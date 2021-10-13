@@ -3,9 +3,8 @@ on:
   workflow_dispatch:
     inputs:
       migrate:
-        description: 'The Pantheon site UUID'
-        required: true
-        default: ''
+        description: 'Migrate the site from PMU classic? "true" or "false"'
+        default: "false"
       name:
         description: 'Human friendly label of site, ideally would match the Pantheon site label'
         default: ''
