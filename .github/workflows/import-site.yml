@@ -81,5 +81,5 @@ jobs:
         with:
           credentials: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           databaseUrl: https://pantheon-managed-updates-default-rtdb.firebaseio.com
-          path: ${{ github.event.inputs.site_uuid }}/site_info
+          path: sites/${{ github.event.inputs.site_uuid }}/site_info
           value: ${{ steps.detect-updates-setup.outputs.UPDATE_DATA }}
