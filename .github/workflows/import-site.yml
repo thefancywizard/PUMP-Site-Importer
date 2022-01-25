@@ -51,7 +51,7 @@ jobs:
           AUTH=$(echo -ne "${{ secrets.PMU_CLASSIC_API_USER}}:${{ secrets.PMU_CLASSIC_API_PASSWORD }}" | base64 --wrap 0)
           SITE_CLASSIC_PMU_DATA=$(curl --header "Content-Type: application/json" --header "Authorization: Basic $AUTH" \https://mu.ps-pantheon.com/api/uw/v2/site/${{ github.event.inputs.site_uuid }})
           echo 'brains'
-          which jq
+          echo '$SITE_CLASSIC_PMU_DATA | jq '.uuid'
           echo $SITE_CLASSIC_PMU_DATA
           echo "::set-output name=SITE_CLASSIC_PMU_DATA::$SITE_CLASSIC_PMU_DATA"
         id: get_site_data_from_classic_api
