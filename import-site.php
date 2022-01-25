@@ -29,6 +29,7 @@ if ($migrate == "true") {
     $SITE_CLASSIC_PMU_DATA = getenv('SITE_CLASSIC_PMU_DATA');
     $SITE_CLASSIC_PMU_DATA = json_decode($SITE_CLASSIC_PMU_DATA, TRUE);
     $name = $SITE_CLASSIC_PMU_DATA['name'];
+    $machinename = exec("terminus site:info $site_uuid --field Name");
     $framework = $SITE_CLASSIC_PMU_DATA['framework'];
     $owner = $SITE_CLASSIC_PMU_DATA['author']['email'];
     $vrt = urlencode(json_encode($SITE_CLASSIC_PMU_DATA['vrt']));
@@ -36,6 +37,7 @@ if ($migrate == "true") {
     $site_info['framework'] = $framework;
     $site_info['owner'] = $owner;
     $site_info['vrt'] = $vrt;
+    $site_info['machinename'] = $machinename;
 
 }
 else {
@@ -43,6 +45,7 @@ else {
     $site_info['framework'] = $framework;
     $site_info['owner'] = $owner;
     $site_info['vrt'] = $vrt;
+    $site_info['machinename'] = $machinename;
 }
 
 // Write out data to pass to next steps.
