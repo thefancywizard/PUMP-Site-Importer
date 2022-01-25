@@ -28,7 +28,7 @@ if ($migrate == "true") {
     print_r("Going to import queried data:" . PHP_EOL);
     $SITE_CLASSIC_PMU_DATA = getenv('SITE_CLASSIC_PMU_DATA');
     $SITE_CLASSIC_PMU_DATA = json_decode($SITE_CLASSIC_PMU_DATA, TRUE);
-    $name = $SITE_CLASSIC_PMU_DATA['name'];
+    $name = $SITE_CLASSIC_PMU_DATA['machinename'];
     $framework = $SITE_CLASSIC_PMU_DATA['framework'];
     $owner = $SITE_CLASSIC_PMU_DATA['author']['email'];
     $vrt = urlencode(json_encode($SITE_CLASSIC_PMU_DATA['vrt']));
