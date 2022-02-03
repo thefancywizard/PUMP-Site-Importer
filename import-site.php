@@ -31,6 +31,7 @@ if ($migrate == "true") {
     $name = $SITE_CLASSIC_PMU_DATA['name'];
     $machinename = exec("terminus site:info $site_uuid --field Name");
     $framework = $SITE_CLASSIC_PMU_DATA['framework'];
+    $git_url = $SITE_CLASSIC_PMU_DATA['config']['ci']['external_repo_url'];
     $owner = $SITE_CLASSIC_PMU_DATA['author']['email'];
     $vrt = urlencode(json_encode($SITE_CLASSIC_PMU_DATA['vrt']));
     $site_info['name'] = $name;
@@ -38,6 +39,10 @@ if ($migrate == "true") {
     $site_info['owner'] = $owner;
     $site_info['vrt'] = $vrt;
     $site_info['machinename'] = $machinename;
+    if (!empty($git_url)) {
+        $site_info['git_url'] = $git_url;
+    }
+    
 
 }
 else {
@@ -46,6 +51,9 @@ else {
     $site_info['owner'] = $owner;
     $site_info['vrt'] = $vrt;
     $site_info['machinename'] = $machinename;
+    if (!empty($git_url)) {
+        $site_info['git_url'] = $git_url;
+    }
 }
 
 // Write out data to pass to next steps.
